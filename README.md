@@ -1,19 +1,95 @@
-**Título:**
-Proyecto de Desarrollo con Livewire y Laravel
+# Lista de Tareas con Livewire
 
-**Descripción:**
-¡Bienvenido al proyecto comunitario de desarrollo con Livewire y Laravel!
+Este documento describe cómo implementar una lista de tareas simple utilizando Livewire en Laravel.
 
-Este espacio está dedicado a compartir experiencias, soluciones y desafíos relacionados con el uso de Livewire y Laravel en el desarrollo de aplicaciones web. Si eres un apasionado por estos frameworks y te encanta colaborar con otros desarrolladores, ¡este es el lugar para ti!
+## Init: Proyecto Laravel 
 
-**Contenido del Proyecto:**
-- **Código Fuente:**
-  Comparte y explora fragmentos de código, componentes y soluciones que has implementado con Livewire y Laravel. Desde pequeños trucos hasta funcionalidades complejas, ¡todo es bienvenido!
+```bash
+composer create-project laravel/laravel ejemplo-practico-tareas
+cd ejemplo-practico-tareas 
+composer require livewire/livewire
+npm install
+```
+Una vez añadidas las dependencias y installarlas  creamos el componente principal, y la base de datos con el modelo 
 
-- **Errores y Desafíos:**
-  Enfrentarse a errores es parte del proceso de desarrollo. Comparte los problemas que has encontrado, y ayudemos a encontrar soluciones juntos. Discutamos sobre desafíos comunes y cómo superarlos.
+```bash
+php artisan make:model Tarea -m
+```
 
-- **Debates y Preguntas:**
-  Únete a conversaciones activas sobre el uso de Livewire y Laravel. Si tienes preguntas o simplemente quieres discutir sobre decisiones de diseño, arquitectura, o cualquier otro tema relacionado, este es el lugar perfecto.
+ Nuestro modelo
+```bash
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-¡Esperamos ver tus contribuciones y construir juntos en este emocionante viaje de desarrollo con Livewire y Laravel! 🚀
+class Tarea extends Model
+{
+    use HasFactory;
+    protected $table = 'tareas';
+    public $fillable = [ 'tarea', 'estatus' ];
+}
+```
+
+ Nuestra migración
+```bash
+public function up(): void
+    {
+        Schema::create('tareas', function (Blueprint $table) {
+            $table->id();
+            $table->string('tarea');
+            $table->boolean('estatus')->default(0);
+            $table->timestamps();
+        });
+    }
+```
+
+## Componente Livewire ListaTareas
+```bash
+php artisan make:livewire ListaTareas
+```
+que crearia el Controllador y la vista 
+app/Livewire/
+└── ListaTareas.php
+
+resources/views/
+├── components
+│   └── icon-livewire.blade.php <------- icon-livewire
+├── livewire
+│   └── lista-tareas.blade.php  <------- livewire
+└── welcome.blade.php
+
+Por ultimo hacemos la migracion en nuestra Base de datos( recuerda configurar tu .env)
+```bash
+php artisan migrate
+```
+
+Ahora corremos nuestros servidores locales 
+terminal 1
+```bash
+php artisan serve
+```
+
+terminal 2
+```bash
+npm run dev
+```
+
+## Clonando el repo
+```bash
+git clone https://github.com/Isc-mntl-snchz/ejemplo-practico-tareas.git
+cd ejemplo-practico-tareas 
+composer install
+npm install
+php artisan migrate
+```
+terminal 1
+```bash
+php artisan serve
+```
+
+terminal 2
+```bash
+npm run dev
+```
+
