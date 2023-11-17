@@ -49,6 +49,8 @@ public function up(): void
 php artisan make:livewire ListaTareas
 ```
 que crearia el Controllador y la vista 
+```bash
+
 app/Livewire/
 └── ListaTareas.php
 
@@ -58,6 +60,7 @@ resources/views/
 ├── livewire
 │   └── lista-tareas.blade.php  <------- livewire
 └── welcome.blade.php
+```
 
 Por ultimo hacemos la migracion en nuestra Base de datos( recuerda configurar tu .env)
 ```bash
