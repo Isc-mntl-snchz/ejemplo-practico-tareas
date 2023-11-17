@@ -84,6 +84,9 @@ git clone https://github.com/Isc-mntl-snchz/ejemplo-practico-tareas.git
 cd ejemplo-practico-tareas 
 composer install
 npm install
+```
+antes de hacer la migracion configuramos el .env y creamos la bd
+```bash
 php artisan migrate
 ```
 terminal 1
